@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.example.model.SpaceRunnerButton;
 
 public class ViewManager {
     private AnchorPane mainPane;
@@ -17,6 +18,7 @@ public class ViewManager {
         mainScene = new Scene(mainPane, 800, 600);
         mainStage = new Stage();
         mainStage.setScene(mainScene);
+        createButton();
     }
 
     public Stage getMainStage() {
@@ -34,6 +36,8 @@ public class ViewManager {
                 System.out.println("mouse entered");
             }
         });**/
+        SpaceRunnerButton button = new SpaceRunnerButton("FREE PARKING");
+        mainPane.getChildren().add(button);
 
 
 
