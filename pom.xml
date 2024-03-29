@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>sample-javafx</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -32,7 +32,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>${javafx.maven.plugin.version}</version>
                 <configuration>
-                    <mainClass>org.example.Javafx.Javafx</mainClass>
+                    <mainClass>org.example.application.Javafx.Javafx</mainClass>
                 </configuration>
             </plugin>
         </plugins>
