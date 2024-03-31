@@ -12,6 +12,7 @@ public class JustVisitingButton extends Button {
 
     public JustVisitingButton() {
         super();
+        setCenterShape(true);
         setPrefWidth(200);
         setPrefHeight(200);
         setStyle(JUST_VISITING_STYLE);

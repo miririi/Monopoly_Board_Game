@@ -13,6 +13,7 @@ public class FreeParkingButton extends Button {
 
     public FreeParkingButton() {
         super();
+        setCenterShape(true);
         setPrefWidth(200);
         setPrefHeight(200);
         setStyle(FREE_PARKING_STYLE);

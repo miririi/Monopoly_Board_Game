@@ -1,34 +1,33 @@
 package org.example.model;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.control.Button;
 
-public class Collect200Button extends Button {
+public class GoJailButton extends Button {
+    private final String GO_JAIL_STYLE = "-fx-background-color: transparent; -fx-background-image: url('go_jail.png');  -fx-background-size: 150px 150px; -fx-background-position: center; -fx-background-repeat: no-repeat";
 
-    private final String COLLECT_200_STYLE = "-fx-background-color: transparent; -fx-background-image: url('collect_200.png');  -fx-background-size: 150px 150px; -fx-background-position: center; -fx-background-repeat: no-repeat";
-
-    public Collect200Button() {
+    public GoJailButton() {
         super();
         setCenterShape(true);
         setPrefWidth(200);
         setPrefHeight(200);
-        setStyle(COLLECT_200_STYLE);
+        setStyle(GO_JAIL_STYLE);
         initializeButtonListeners();
 
     }
 
     private void setButtonPressedStyle(){  //Pressed Button is smaller
-        setStyle(COLLECT_200_STYLE);
+        setStyle(GO_JAIL_STYLE);
         setPrefHeight(145);
         setLayoutY(getLayoutY()+4);
 
     }
 
     private void setButtonReleasedStyle(){
-        setStyle(COLLECT_200_STYLE);
+        setStyle(GO_JAIL_STYLE);
         setPrefHeight(45);
         setLayoutY(getLayoutY()-4);
 
