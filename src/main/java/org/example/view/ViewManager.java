@@ -1,12 +1,11 @@
 package org.example.view;
 
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.example.model.SpaceRunnerButton;
+import org.example.model.Collect200Button;
+import org.example.model.FreeParkingButton;
+import org.example.model.JustVisitingButton;
 
 public class ViewManager {
     private AnchorPane mainPane;
@@ -26,20 +25,15 @@ public class ViewManager {
     }
 
     private void createButton() {
-        /**Button button = new Button();
-        button.setLayoutX(100);
-        button.setLayoutY(100);
-        mainPane.getChildren().add(button);
-        button.setOnMouseEntered(new EventHandler<Event>(){
-            @Override
-            public void handle(Event event) {
-                System.out.println("mouse entered");
-            }
-        });**/
-        SpaceRunnerButton button = new SpaceRunnerButton("FREE PARKING");
-        mainPane.getChildren().add(button);
-        //Test test test
+        FreeParkingButton button = new FreeParkingButton();
+        JustVisitingButton just_visiting_button = new JustVisitingButton();
+        Collect200Button collect_200_button = new Collect200Button();
 
+        mainPane.getChildren().add(button);
+        mainPane.getChildren().add(just_visiting_button);
+        mainPane.getChildren().add(collect_200_button);
+        button.setLayoutX(600);
+        collect_200_button.setLayoutY(500);
 
 
     }
