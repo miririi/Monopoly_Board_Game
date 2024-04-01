@@ -113,17 +113,17 @@ public class ViewManager {
     }
 
     private void createButtonsOnRight() {
-        String [] buttons = {"go_jail", "marvin_gardens", "water_works", "ventnor_avenue", "atlantic_avenue", "railroad", "illinois_avenue", "indiana_avenue", "chance_blue", "kentucky_avenue" };
+        String [] buttons = {"go_jail", "marvin_gardens", "water_works", "ventnor_avenue", "atlantic_avenue", "railroad", "illinois_avenue", "indiana_avenue", "chance", "kentucky_avenue" };
         Double y_axis = 0.0;
         for (String monopoly_button: buttons){
             Button style_button = new Button();
 
             style_button.setPrefHeight(121.0);
             style_button.setPrefWidth(180);
-            style_button.setStyle("-fx-background-color: transparent; -fx-background-image: url('go_jail.png');  -fx-background-size: 150px 150px; -fx-background-position: center; -fx-background-repeat: no-repeat");
+            style_button.setStyle("-fx-background-color: transparent; -fx-background-image: url('" + monopoly_button + ".png');  -fx-background-size: 150px 150px; -fx-background-position: center; -fx-background-repeat: no-repeat");
             mainPane.getChildren().add(style_button);
             mainPane.setBottomAnchor(style_button, y_axis);
-            mainPane.setLeftAnchor(style_button, 1365.0);
+            mainPane.setLeftAnchor(style_button, 1375.0);
             y_axis += 123.0;
             initializeButtonListeners(monopoly_button, style_button);
         }
@@ -132,12 +132,12 @@ public class ViewManager {
     private void createButtonsOnBottom() {
         Double x_axis = 150.0;
         Double y_axis = 0.0;
-        String [] buttons = {"boardwalk", "luxury_tax", "park_place", "chance_red", "short_line", "pennsylvania_avenue", "community_chest", "north_carolina_avenue", "pacific_avenue"};
+        String [] buttons = {"boardwalk", "luxury_tax", "park_place", "chance", "short_line", "pennsylvania_avenue", "community_chest", "north_carolina_avenue", "pacific_avenue"};
         for(String monopoly_button: buttons){
             Button style_button = new Button();
             style_button.setPrefHeight(140.0);
             style_button.setPrefWidth(200.0);
-            style_button.setStyle("-fx-background-color: transparent; -fx-background-image: url('go_jail.png');  -fx-background-size: 150px 150px; -fx-background-position: center; -fx-background-repeat: no-repeat");
+            style_button.setStyle("-fx-background-color: transparent; -fx-background-image: url('" + monopoly_button + ".png');  -fx-background-size: 150px 150px; -fx-background-position: center; -fx-background-repeat: no-repeat");
             mainPane.getChildren().add(style_button);
             mainPane.setLeftAnchor(style_button, x_axis);
             mainPane.setBottomAnchor(style_button, y_axis);
