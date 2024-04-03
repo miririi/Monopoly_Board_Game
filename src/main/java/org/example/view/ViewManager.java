@@ -103,14 +103,25 @@ public class ViewManager {
                 mainPane.setBottomAnchor(style_button, y_axis);
             }
             y_axis += 123.0;
-            initializeButtonListeners(monopoly_button, style_button);
+            //initializeButtonListeners(monopoly_button, style_button);
 
-            style_button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    subscene.moveSubScene();
-                }
-            });
+            if(!monopoly_button.equals("collect_200") && !monopoly_button.equals("chance") && !monopoly_button.equals("community_chest") && !monopoly_button.equals("luxury_tax")){
+                style_button.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        subscene.moveSubScene();
+                    }
+                });
+            }
+            else {
+                style_button.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        subscene.deleteSubScene();
+                    }
+                });
+
+            }
         }
     }
 
@@ -126,7 +137,24 @@ public class ViewManager {
             mainPane.getChildren().add(style_button);
             mainPane.setLeftAnchor(style_button, x_axis);
             x_axis += 135.0;
-            initializeButtonListeners(monopoly_button, style_button);
+            //initializeButtonListeners(monopoly_button, style_button);
+            if(!monopoly_button.equals("free_parking") && !monopoly_button.equals("community_chest")){
+                style_button.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        subscene.moveSubScene();
+                    }
+                });
+
+            } else {
+                style_button.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        subscene.deleteSubScene();
+                    }
+                });
+
+            }
 
         }
     }
@@ -144,7 +172,22 @@ public class ViewManager {
             mainPane.setBottomAnchor(style_button, y_axis);
             mainPane.setLeftAnchor(style_button, 1375.0);
             y_axis += 123.0;
-            initializeButtonListeners(monopoly_button, style_button);
+            if(!monopoly_button.equals("go_jail") && !monopoly_button.equals("chance")){
+                style_button.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        subscene.moveSubScene();
+                    }
+                });
+            } else {
+                style_button.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        subscene.deleteSubScene();
+                    }
+                });
+
+            }
         }
     }
 
@@ -161,7 +204,22 @@ public class ViewManager {
             mainPane.setLeftAnchor(style_button, x_axis);
             mainPane.setBottomAnchor(style_button, y_axis);
             x_axis += 135.0;
-            initializeButtonListeners(monopoly_button, style_button);
+            if(!monopoly_button.equals("luxury_tax") && !monopoly_button.equals("chance") && !monopoly_button.equals("community_chest")){
+                style_button.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        subscene.moveSubScene();
+                    }
+                });
+            } else {
+                style_button.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        subscene.deleteSubScene();
+                    }
+                });
+
+            }
 
         }
     }

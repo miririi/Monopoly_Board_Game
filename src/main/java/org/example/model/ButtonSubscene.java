@@ -55,4 +55,15 @@ public class ButtonSubscene extends SubScene {
 
         transition.play();
     }
+
+    public void deleteSubScene() {
+        TranslateTransition transition = new TranslateTransition();
+        transition.setDuration(Duration.seconds(0.3));
+        transition.setNode(this);
+        transition.setToX(0);
+        isHidden = true;
+
+        transition.play();
+
+    }
 }
