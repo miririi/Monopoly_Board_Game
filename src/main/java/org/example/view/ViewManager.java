@@ -1,5 +1,6 @@
 package org.example.view;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -10,11 +11,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.example.model.ButtonSubscene;
 
 public class ViewManager {
     private AnchorPane mainPane;
     private Scene mainScene;
     private Stage mainStage;
+
+    private ButtonSubscene subscene;
 
     private double button_width, button_height;
 
@@ -23,10 +27,12 @@ public class ViewManager {
         mainScene = new Scene(mainPane, 800, 600);
         mainStage = new Stage();
         mainStage.setScene(mainScene);
+
         createButtonsOnLeft();
         createButtonsOnTop();
         createButtonsOnRight();
         createButtonsOnBottom();
+        createSubScenes();
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
         //set Stage boundaries to visible bounds of the main screen
@@ -37,6 +43,12 @@ public class ViewManager {
         button_height = primaryScreenBounds.getHeight();
         button_height= (Double) (button_height / 11.0 - 8.0);
         System.out.println(button_height);
+    }
+
+    private void createSubScenes() {
+        subscene = new ButtonSubscene();
+        mainPane.getChildren().add(subscene);
+
     }
 
     public Stage getMainStage() {
@@ -76,7 +88,7 @@ public class ViewManager {
     }
     private void createButtonsOnLeft() {
         double y_axis = 0.0;
-        String [] buttons = {"collect_200", "MR_avenue", "community_chest", "baltic_avenue", "income_tax", "reading_railroad", "oriental_avenue", "chance", "vermont_avenue", "connecticut_avenue", "just_visiting" };
+        String [] buttons = {"collect_200", "MR_avenue", "community_chest", "baltic_avenue", "luxury_tax", "reading_railroad", "oriental_avenue", "chance", "vermont_avenue", "connecticut_avenue", "just_visiting" };
         for (String monopoly_button: buttons){
             Button style_button = new Button();
             style_button.setPrefHeight(121.0);
@@ -92,6 +104,13 @@ public class ViewManager {
             }
             y_axis += 123.0;
             initializeButtonListeners(monopoly_button, style_button);
+
+            style_button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    subscene.moveSubScene();
+                }
+            });
         }
     }
 
