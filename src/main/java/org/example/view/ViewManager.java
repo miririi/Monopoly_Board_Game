@@ -1,26 +1,44 @@
 package org.example.view;
 
+import javafx.animation.AnimationTimer;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.example.model.ButtonSubscene;
+import org.example.model.Character;
 
-public class ViewManager {
+public class ViewManager{
     private AnchorPane mainPane;
     private Scene mainScene;
     private Stage mainStage;
 
     private ButtonSubscene subscene;
+    private boolean isLeftKeyPressed;
+    private boolean isRightKeyPressed;
 
-    private double button_width, button_height;
+    private ImageView character;
+
+    private int angle;
+
+    private AnimationTimer gameTimer;
+
+
+    private double GAME_WIDTH;
+    private double GAME_HEIGHT;
 
     public ViewManager() {
         mainPane = new AnchorPane();
@@ -34,15 +52,21 @@ public class ViewManager {
         createButtonsOnBottom();
         createSubScenes();
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        initialize();
 
         //set Stage boundaries to visible bounds of the main screen
         mainStage.setX(primaryScreenBounds.getMinX());
         mainStage.setY(primaryScreenBounds.getMinY());
         mainStage.setWidth(primaryScreenBounds.getWidth());
         mainStage.setHeight(primaryScreenBounds.getHeight());
-        button_height = primaryScreenBounds.getHeight();
-        button_height= (Double) (button_height / 11.0 - 8.0);
-        System.out.println(button_height);
+
+        GAME_WIDTH = primaryScreenBounds.getWidth();
+        GAME_HEIGHT = primaryScreenBounds.getHeight();
+
+        mainStage.show();
+
+
+
     }
 
     private void createSubScenes() {
@@ -102,8 +126,9 @@ public class ViewManager {
             else {
                 mainPane.setBottomAnchor(style_button, y_axis);
             }
+
             y_axis += 123.0;
-            //initializeButtonListeners(monopoly_button, style_button);
+
 
             if(!monopoly_button.equals("collect_200") && !monopoly_button.equals("chance") && !monopoly_button.equals("community_chest") && !monopoly_button.equals("luxury_tax")){
                 style_button.setOnAction(new EventHandler<ActionEvent>() {
@@ -222,6 +247,35 @@ public class ViewManager {
             }
 
         }
+    }
+
+
+    /* private void createCharacter(Character choosenCharacter){
+        character = new ImageView("/dog.png");
+        //character.setStyle("-fx-background-color: transparent; -fx-background-image: url('"+ style + ".png');  -fx-background-size: 150px 150px; -fx-background-position: center; -fx-background-repeat: no-repeat");
+
+        character.setLayoutX(150);
+        character.setLayoutY(150);
+        mainPane.getChildren().add(character);
+
+
+    } */
+
+
+
+    public void initialize(){
+        ImageView character = new ImageView("/dog.png");
+        character.setFitHeight(150.0);
+        character.setFitWidth(150.0);
+        mainPane.getChildren().add(character);
+        mainPane.setBottomAnchor(character, 0.0);
+        TranslateTransition translate = new TranslateTransition();
+        translate.setDuration(Duration.millis(1000));
+        translate.setNode(character);
+        if(1 == 1){ // Augenzahl
+            translate.setByX(1000);
+        }
+        translate.play();
     }
 
 }
