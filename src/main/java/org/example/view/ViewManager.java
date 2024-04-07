@@ -1,17 +1,17 @@
 package org.example.view;
 
 import javafx.animation.AnimationTimer;
+import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -19,28 +19,27 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.model.ButtonSubscene;
-import org.example.model.Character;
+
+import java.io.File;
+import java.util.LinkedList;
+import java.util.Random;
 
 public class ViewManager{
     private AnchorPane mainPane;
     private Scene mainScene;
     private Stage mainStage;
-
     private ButtonSubscene subscene;
-    private boolean isLeftKeyPressed;
-    private boolean isRightKeyPressed;
-
     private ImageView character;
+    private Rectangle2D primaryScreenBounds;
+    private Button rollButton = new Button();
+    private ImageView diceImage = new ImageView();
+    Random random = new Random();
 
-    private int angle;
+    LinkedList<ImageView> list = new LinkedList<>();
 
-    private AnimationTimer gameTimer;
-
-
-    private double GAME_WIDTH;
-    private double GAME_HEIGHT;
 
     public ViewManager() {
+
         mainPane = new AnchorPane();
         mainScene = new Scene(mainPane, 800, 600);
         mainStage = new Stage();
@@ -51,8 +50,10 @@ public class ViewManager{
         createButtonsOnRight();
         createButtonsOnBottom();
         createSubScenes();
-        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        initialize();
+        primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+        move_character();
+        roll();
+
 
         //set Stage boundaries to visible bounds of the main screen
         mainStage.setX(primaryScreenBounds.getMinX());
@@ -60,14 +61,39 @@ public class ViewManager{
         mainStage.setWidth(primaryScreenBounds.getWidth());
         mainStage.setHeight(primaryScreenBounds.getHeight());
 
-        GAME_WIDTH = primaryScreenBounds.getWidth();
-        GAME_HEIGHT = primaryScreenBounds.getHeight();
-
         mainStage.show();
+    }
 
+    public int rollDice(){ return random.nextInt(6)+1;}
 
+    public void roll(){
+        int number = rollDice();
+        ImageView dice = new ImageView(new Image("dice"+number+".png", 100, 0, true, true));
+
+        Button roll = new Button("Roll Dice");
+        roll.setMinSize(15, 25);
+        roll.setMinWidth(100);
+        roll.setMinHeight(50);
+        roll.setLayoutY(1000);
+        roll.setLayoutX(1000);
+        dice.setLayoutY(900);
+        dice.setLayoutX(1000);
+        mainPane.getChildren().add(roll);
+        mainPane.getChildren().add(dice);
+        roll.setOnAction(e -> {
+            RotateTransition rt = new RotateTransition();
+            rt.setByAngle(360);
+            rt.setNode(diceImage);
+            rt.setDuration(Duration.millis(1000));
+            rt.play();
+            rt.setOnFinished(j -> dice.setImage(new Image("dice"+ rollDice() + ".png", 100, 0, true, true)));
+
+        });
 
     }
+
+
+
 
     private void createSubScenes() {
         subscene = new ButtonSubscene();
@@ -263,7 +289,7 @@ public class ViewManager{
 
 
 
-    public void initialize(){
+    public void move_character(){
         ImageView character = new ImageView("/dog.png");
         character.setFitHeight(150.0);
         character.setFitWidth(150.0);
@@ -272,10 +298,19 @@ public class ViewManager{
         TranslateTransition translate = new TranslateTransition();
         translate.setDuration(Duration.millis(1000));
         translate.setNode(character);
-        if(1 == 1){ // Augenzahl
-            translate.setByX(1000);
-        }
         translate.play();
+        if(1 == 1){ // Augenzahl
+            translate.setOnFinished(actionEvent -> {
+                updatePos(character);
+
+            });
+
+        }
+
+    }
+
+    private void updatePos(ImageView character) {
+        mainPane.setTopAnchor(character, 0.0);
     }
 
 }
