@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
 import org.example.model.ButtonSubscene;
 
 import java.io.File;
@@ -25,6 +26,8 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class ViewManager{
+
+    private int dice_number;
     private AnchorPane mainPane;
     private Scene mainScene;
     private Stage mainStage;
@@ -44,6 +47,7 @@ public class ViewManager{
         mainScene = new Scene(mainPane, 800, 600);
         mainStage = new Stage();
         mainStage.setScene(mainScene);
+        dice_number = 0;
 
         createButtonsOnLeft();
         createButtonsOnTop();
@@ -51,7 +55,7 @@ public class ViewManager{
         createButtonsOnBottom();
         createSubScenes();
         primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        move_character();
+        initialize_character("/dog.png");
         roll();
 
 
@@ -67,8 +71,8 @@ public class ViewManager{
     public int rollDice(){ return random.nextInt(6)+1;}
 
     public void roll(){
-        int number = rollDice();
-        ImageView dice = new ImageView(new Image("dice"+number+".png", 100, 0, true, true));
+        dice_number = rollDice();
+        ImageView dice = new ImageView(new Image("dice"+dice_number+".png", 100, 0, true, true)); // erstes Anzeigebild
 
         Button roll = new Button("Roll Dice");
         roll.setMinSize(15, 25);
@@ -86,7 +90,11 @@ public class ViewManager{
             rt.setNode(diceImage);
             rt.setDuration(Duration.millis(1000));
             rt.play();
-            rt.setOnFinished(j -> dice.setImage(new Image("dice"+ rollDice() + ".png", 100, 0, true, true)));
+            dice_number = rollDice();
+            rt.setOnFinished(j -> dice.setImage(new Image("dice"+ dice_number + ".png", 100, 0, true, true))); // neues Bild
+            // Warten
+            // Figur bewegen
+            move_character(dice_number);
 
         });
 
@@ -287,30 +295,43 @@ public class ViewManager{
 
     } */
 
-
-
-    public void move_character(){
-        ImageView character = new ImageView("/dog.png");
+    public void initialize_character(String url) {
+        character = new ImageView(url);
         character.setFitHeight(150.0);
         character.setFitWidth(150.0);
         mainPane.getChildren().add(character);
-        mainPane.setBottomAnchor(character, 0.0);
+        mainPane.setBottomAnchor(character, 0.0); // Figur auf dem Startfeld
+
+    }
+
+
+
+    public void move_character(int dice_number) {
         TranslateTransition translate = new TranslateTransition();
         translate.setDuration(Duration.millis(1000));
         translate.setNode(character);
         translate.play();
-        if(1 == 1){ // Augenzahl
+        if (1 == 1) { // Augenzahl
             translate.setOnFinished(actionEvent -> {
-                updatePos(character);
+                updatePos(dice_number, character);
 
             });
 
+
         }
-
     }
 
-    private void updatePos(ImageView character) {
-        mainPane.setTopAnchor(character, 0.0);
+    private void updatePos(int dice_number, ImageView character) {
+        double vert = character.getY();
+        double horizontal = character.getX();
+        System.out.println(horizontal);
+        if(horizontal == 0){ // Figur links
+                 character.setY(123.0 * dice_number + vert);
+                mainPane.setBottomAnchor(character, 123.0 * dice_number + vert);
+
+        }
     }
+
+
 
 }
