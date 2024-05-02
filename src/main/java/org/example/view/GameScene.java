@@ -182,7 +182,7 @@ public class GameScene extends ViewManager {
         character.setFitHeight(70.0);
         character.setFitWidth(70.0);
         gamePane.getChildren().add(character);
-        gamePane.setBottomAnchor(character, 0.0); // Figur auf dem Startfeld
+        gamePane.setBottomAnchor(character, 0.0);
 
     }
 
@@ -210,8 +210,7 @@ public class GameScene extends ViewManager {
 
     public void roll(){
         dice_number = rollDice();
-        ImageView dice = new ImageView(new Image("dice"+dice_number+".png", 100, 0, true, true)); // erstes Anzeigebild
-
+        ImageView dice = new ImageView(new Image("dice"+dice_number+".png", 100, 0, true, true));
         Button roll = new Button("Roll Dice");
         roll.setMinSize(15, 25);
         roll.setMinWidth(50);
@@ -229,7 +228,7 @@ public class GameScene extends ViewManager {
             rt.setDuration(Duration.millis(1000));
             rt.play();
             dice_number = rollDice();
-            rt.setOnFinished(j -> dice.setImage(new Image("dice"+ dice_number + ".png", 100, 0, true, true))); // neues Bild
+            rt.setOnFinished(j -> dice.setImage(new Image("dice"+ dice_number + ".png", 100, 0, true, true)));
             move_character(dice_number);
 
         });

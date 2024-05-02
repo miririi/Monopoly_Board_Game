@@ -37,7 +37,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>${javafx.maven.plugin.version}</version>
                 <configuration>
-                    <mainClass>org.example.application.Javafx</mainClass>
+                    <mainClass>org.example.application.MonopolyApp</mainClass>
                 </configuration>
             </plugin>
         </plugins>

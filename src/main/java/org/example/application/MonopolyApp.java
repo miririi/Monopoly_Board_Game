@@ -1,16 +1,13 @@
 package org.example.application;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
-import org.example.view.GameScene;
 import org.example.view.MainMenu;
 
-import java.io.FileNotFoundException;
 
-public class Javafx extends Application {
+public class MonopolyApp extends Application {
 
         @Override
-        public void start(Stage stage) throws FileNotFoundException {
+        public void start(Stage stage){
             /**GameScene gameScene = new GameScene();
             gameScene.create_gameboard();
             gameScene.setScene(gameScene.gamePane);
