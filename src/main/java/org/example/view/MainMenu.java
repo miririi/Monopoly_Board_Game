@@ -9,17 +9,28 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.example.entity.MonopolyGame;
 import org.example.service.GameService;
+import org.example.network.GameServer;
+import org.example.network.GameClient;
 
 
 public class MainMenu extends ViewManager {
 
+
     public AnchorPane startPane;
     private GameService service;
-    public MainMenu(){
+    private MonopolyGame game;
+    private GameServer server;
+    public MainMenu(MonopolyGame game){
         super();
         startPane = new AnchorPane();
         service = new GameService();
+        this.game = game;
+        game.start();
+        //game = new MonopolyGame();
+        //server = new GameServer(game);
+
     }
 
     public void createLayout() {
@@ -47,7 +58,9 @@ public class MainMenu extends ViewManager {
         hb.setSpacing(10);
         hb.setLayoutX(350);
         hb.setLayoutY(200);
+        Button login = new Button("Login");
         startPane.getChildren().add(hb);
+        startPane.getChildren().add(login);
         start.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -55,6 +68,15 @@ public class MainMenu extends ViewManager {
 
             }
         });
+        login.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                game.start_game();
+                System.out.println("New Login");
+
+            }
+        });
+
     }
 
     public void login(){

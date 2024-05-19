@@ -1,6 +1,7 @@
 package org.example.application;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import org.example.entity.MonopolyGame;
 import org.example.view.MainMenu;
 
 
@@ -8,14 +9,8 @@ public class MonopolyApp extends Application {
 
         @Override
         public void start(Stage stage){
-            /**GameScene gameScene = new GameScene();
-            gameScene.create_gameboard();
-            gameScene.setScene(gameScene.gamePane);
-            gameScene.setStage(new Stage());
-            gameScene.createSubScenes();
-            gameScene.initialize_character("dog.png");
-            gameScene.roll();**/
-            MainMenu startMenu = new MainMenu();
+            MonopolyGame game = new MonopolyGame();
+            MainMenu startMenu = new MainMenu(game);
             startMenu.createLayout();
 
             startMenu.setScene(startMenu.startPane);
